@@ -9,15 +9,66 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "gist-uploader.createGist",
-        "title": "createGist"
+        "title": "Create Gist"
+      },
+      {
+        "command": "gist-uploader.createGistFromSelection",
+        "title": "Create Gist from Selection"
+      },
+      {
+        "command": "gist-uploader.openGistInBrowser",
+        "title": "Open Gist in Browser"
+      },
+      {
+        "command": "gist-uploader.deleteGist",
+        "title": "Delete Gist"
+      },
+      {
+        "command": "gist-uploader.editGistDescription",
+        "title": "Edit Gist Description"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorTextFocus",
+          "command": "gist-uploader.createGist",
+          "group": "z_commands"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "gist-uploader.createGist",
+          "group": "z_commands"
+        },
+        {
+          "when": "explorerResourceIsFile",
+          "command": "gist-uploader.createGist",
+          "group": "z_commands"
+        },
+        {
+          "when": "explorerResourceIsFile",
+          "command": "gist-uploader.openGistInBrowser",
+          "group": "z_commands"
+        },
+        {
+          "when": "explorerResourceIsFile",
+          "command": "gist-uploader.deleteGist",
+          "group": "z_commands"
+        },
+        {
+          "when": "explorerResourceIsFile",
+          "command": "gist-uploader.editGistDescription",
+          "group": "z_commands"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
@@ -25,13 +76,11 @@
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "testj": "jest"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.1",
-    "@types/mocha": "^10.0.1",
     "@types/nock": "^11.1.0",
     "@types/node": "16.x",
     "@types/vscode": "^1.77.0",
@@ -41,7 +90,6 @@
     "eslint": "^8.36.0",
     "glob": "^8.1.0",
     "jest": "^29.5.0",
-    "mocha": "^10.2.0",
     "nock": "^13.3.0",
     "ts-jest": "^29.1.0",
     "typescript": "^4.9.5",

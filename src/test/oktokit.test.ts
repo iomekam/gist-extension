@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import OctokitClient from '../oktokit';
 import nock from 'nock';
 
@@ -5,7 +6,7 @@ describe('OctokitClient', () => {
   let octokitClient: OctokitClient;
 
   beforeAll(() => {
-    octokitClient = new OctokitClient();
+    octokitClient = new OctokitClient("");
   });
 
   afterAll(() => {

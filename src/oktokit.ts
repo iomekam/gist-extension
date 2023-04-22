@@ -1,15 +1,11 @@
 import { Octokit } from "@octokit/rest";
-import * as fs from 'fs';
 
 class OctokitClient {
   private octokit: Octokit;
 
-  constructor() {
-    const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-    const githubToken = config.github.token;
-
+  constructor(accessToken: String) {
     this.octokit = new Octokit({
-      auth: githubToken
+      auth: accessToken
     });
   }
 
@@ -18,6 +14,7 @@ class OctokitClient {
       description: description,
       public: isPublic,
       files: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         "snippet.ts": {
           content: content,
         },
